@@ -20,7 +20,10 @@ http.createServer((req, res) => {
             } else {
                 var newPath = path + files.filetoupload.name;
                 mv(files.filetoupload.path, newPath, err => {
-                    if (err) throw err;
+                    if (err) {
+                        res.write('nee');
+                        res.end();
+                    }
                     res.write('Je troep is jammer genoeg geupload');
                     res.end();
                 });
