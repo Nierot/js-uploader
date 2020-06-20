@@ -6,13 +6,15 @@ var fs = require('fs');
 
 console.log("Listening on 42069");
 
+const path = 'path';
+
 http.createServer((req, res) => {
     if (req.url == '/fileupload') {
         console.log('fileupload')
         var form = new formidable.IncomingForm();
         form.parse(req, (err, fields, files) => {
             console.log("Nieuwe troep binnengekomen: " + files.filetoupload.name);
-            var newPath = 'C:/Users/Niels/Desktop/' + files.filetoupload.name;
+            var newPath = path + files.filetoupload.name;
             fs.rename(files.filetoupload.path, newPath, err => {
                 if (err) throw err;
                 res.write('Je troep is jammer genoeg geupload');
