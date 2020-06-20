@@ -13,6 +13,10 @@ http.createServer((req, res) => {
         console.log('fileupload')
         var form = new formidable.IncomingForm();
         form.parse(req, (err, fields, files) => {
+            if (err) {
+                res.write('Nee');
+                res.end();
+            }
             console.log("Nieuwe troep binnengekomen: " + files.filetoupload.name);
             if ((files.filetoupload.name).split('.').pop() != 'mp3') {
                 res.write('Nee');
