@@ -2,7 +2,7 @@
 
 var formidable = require('formidable'); 
 var http = require('http');
-var fs = require('fs');
+var mv = require('mv');
 
 console.log("Listening on 42069");
 
@@ -19,7 +19,7 @@ http.createServer((req, res) => {
                 res.end();
             } else {
                 var newPath = path + files.filetoupload.name;
-                fs.rename(files.filetoupload.path, newPath, err => {
+                mv(files.filetoupload.path, newPath, err => {
                     if (err) throw err;
                     res.write('Je troep is jammer genoeg geupload');
                     res.end();
