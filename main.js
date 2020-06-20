@@ -6,7 +6,7 @@ var fs = require('fs');
 
 console.log("Listening on 42069");
 
-const path = 'music/';
+const path = '/home/pi/HDD/discord/Niebot/music/';
 
 http.createServer((req, res) => {
     if (req.url == '/fileupload') {
