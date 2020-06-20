@@ -6,7 +6,7 @@ var fs = require('fs');
 
 console.log("Listening on 42069");
 
-const path = 'path';
+const path = '';
 
 http.createServer((req, res) => {
     if (req.url == '/fileupload') {
@@ -14,12 +14,17 @@ http.createServer((req, res) => {
         var form = new formidable.IncomingForm();
         form.parse(req, (err, fields, files) => {
             console.log("Nieuwe troep binnengekomen: " + files.filetoupload.name);
-            var newPath = path + files.filetoupload.name;
-            fs.rename(files.filetoupload.path, newPath, err => {
-                if (err) throw err;
-                res.write('Je troep is jammer genoeg geupload');
+            if ((files.filetoupload.name).split('.').pop() != 'mp3') {
+                res.write('Nee');
                 res.end();
-            });
+            } else {
+                var newPath = path + files.filetoupload.name;
+                fs.rename(files.filetoupload.path, newPath, err => {
+                    if (err) throw err;
+                    res.write('Je troep is jammer genoeg geupload');
+                    res.end();
+                });
+            }
         });
     } else {
         res.writeHead(200, {'Content-Type': 'text/html'});
