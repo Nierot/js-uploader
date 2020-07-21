@@ -6,7 +6,7 @@ var mv = require('mv');
 
 console.log("Listening on 42069");
 
-const path = '/home/pi/HDD/discord/Niebot/music/';
+const path = '/music/';
 
 http.createServer((req, res) => {
     if (req.url == '/fileupload') {
@@ -23,6 +23,7 @@ http.createServer((req, res) => {
                 res.end();
             } else {
                 var newPath = path + files.filetoupload.name;
+                console.log(newPath);
                 mv(files.filetoupload.path, newPath, err => {
                     if (err) {
                         res.write('nee');
